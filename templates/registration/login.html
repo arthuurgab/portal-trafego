@@ -1,0 +1,57 @@
+{% extends 'base/base_login.html' %}
+{% block content %}
+
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+{% if next %}
+{% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+{% else %}
+    <p>Please login to see this page.</p>
+{% endif %}
+{% endif %}
+
+<section class="bg-gray-100 py-8">
+      <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
+        <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+          Acesse sua Conta!
+        </h2>
+        <div class="w-full mb-4">
+          <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
+            <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-2 shadow" id="username" name="username" placeholder="username">
+                        <label class="text-black-50" for="username"><i class='bx bxs-user'></i>Usuário</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-2 shadow" id="password" name="password" placeholder="Senha">
+                        <label class="text-black-50" for="password"><i class='bx bxs-lock-alt'></i>Senha</label>
+                    </div>
+                    <div id="button" class="flex flex-col w-full my-5">
+                        <button type="submit" class="btn btn-lg text-white w-full py-4 bg-green-600 hover:bg-green-800 rounded-lg text-green-100">
+                            <div class="flex flex-row items-center justify-center">
+                                <div class="mr-2">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                                    </svg>
+                                </div>
+                                Entrar
+                            </div>
+                        </button>
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </div>
+                    <input type="hidden" name="next" value="{{ next }}">
+                    <div class="flex justify-evenly mt-5">
+    <!--            <a href="#" class="w-full text-center font-medium text-gray-500">Recover password!</a>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

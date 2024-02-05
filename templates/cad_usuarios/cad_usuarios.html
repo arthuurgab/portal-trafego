@@ -1,48 +1,45 @@
 {% extends 'base/base_login.html' %}
 {% block content %}
-  <section class="bg-gray-100 py-8">
-      <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
+<section class="bg-gray-100 py-8">
+    {% if messages %}
+        <ul class="bg-red-700 text-white">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="container mx-auto px-2 pt-4 pb-12 text-gray-800">
         <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
-          Crie sua Conta!
+            Crie sua Conta!
         </h2>
         <div class="w-full mb-4">
-          <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
-        <div class="flex flex-col sm:flex-row justify-center pt-12 my-12 sm:my-4">
-            <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
-                <form action="/criar_usuario" method="POST">
-                    <!-- Campo Nome -->
+        <div class="flex justify-center">
+            <div class="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3">
+                <form action="{% url 'cad_usuarios' %}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    {% csrf_token %}
                     <div class="mb-4">
-                        <label for="nome" class="block text-gray-700 text-sm font-bold mb-2">Nome:</label>
-                        <input type="text" id="nome" name="nome" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Nome..." name="nome">
                     </div>
-                    <!-- Campo Email -->
                     <div class="mb-4">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="Email..." name="email">
                     </div>
-                    <!-- Campo Senha -->
                     <div class="mb-4">
-                        <label for="senha" class="block text-gray-700 text-sm font-bold mb-2">Senha:</label>
-                        <input type="password" id="senha" name="senha" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Senha..." name="senha">
                     </div>
-                    <!-- Confirmação de Senha -->
                     <div class="mb-4">
-                        <label for="confirm_senha" class="block text-gray-700 text-sm font-bold mb-2">Confirme a Senha:</label>
-                        <input type="password" id="confirm_senha" name="confirm_senha" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Confirme Senha..." name="confirm_senha">
                     </div>
-                    <!-- Checkbox de Termos -->
-                    <div class="mb-4">
-                        <input type="checkbox" id="termos" name="termos" class="mr-2 leading-tight">
-                        <label for="termos" class="text-gray-700 text-sm font-bold">Aceito os termos e condições</label>
-                    </div>
-                    <!-- Botão de Criar -->
-                    <div class="mb-4">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Criar</button>
+                    <div class="flex items-center justify-between">
+                        <button class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Cadastrar
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
+
 {% endblock %}
